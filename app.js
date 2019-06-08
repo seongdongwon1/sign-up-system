@@ -12,15 +12,16 @@ app.get('/', function(req, res){
 });
 
 app.post('/receive', function(req, res){
-    var user_Id = req.body.user_Id;
-    var user_nick = req.body.user_nick;
-    var user_pw1 = req.body.user_pw1;
-    var user_pw2 = req.body.user_pw2;
-    var user_name = req.body.user_name;
-    var user_email = req.body.user_email;
-    var user_email2 = req.body.user_email2;
-    res.send('ID :' + user_Id + '<br>' + 'NICK :' + user_nick + '<br>' + 'PW1 :' + user_pw1 + '<br>' + 'PW2 :' + user_pw2 + '<br>' 
-    + 'NAME :' + user_name + '<br>' + 'EMAIL :' + user_email + '<br>' + 'EMAIL2 :'+ user_email2 + '<br>');
+    var accountStr = '{"ID" : req.body.user_Id,"NICK":req.body.user_nick,"PW1":req.body.user_pw1,"PW2":req.body.user_pw2,"NAME":req.body.user_name,"EMAIL":req.body.user_email,"EMAIL2":req.body.user_email2}';
+    var accountObj = JSON.parse(accountStr);
+    res.send(accountObj);
+    /*var _accountStr = ' ';
+    for(var i = 0; i < accountObj; i++){
+        _accountStr +='<li>'+accountObj[i]+'</li>';
+    }
+    _accountStr = '<ul>'+_accountStr+'<ul>';*/
+
+
 });
 
 app.listen(3000, function(){
