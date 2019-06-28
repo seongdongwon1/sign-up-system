@@ -1,0 +1,9 @@
+{
+    "ID" : "req.body.user_Id",
+    "NICK" : "req.body.user_nick",
+    "PW1" : "req.body.user_pw1",
+    "PW2" : "req.body.user_pw2",
+    "NAME" : "req.body.user_name",
+    "email" : "req.body.user_email",
+    "email2" : "req.body.user_email2"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "public",
+  "version": "1.0.0",
+  "description": "<https://blog.naver.com/ehddnjs403><br> 공부기록 네이버 블로그",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.6.1",
+    "express": "^4.17.1",
+    "node-mysql": "^0.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seongdongwon1/sign-up-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/seongdongwon1/sign-up-system/issues"
+  },
+  "homepage": "https://github.com/seongdongwon1/sign-up-system#readme"
+}
