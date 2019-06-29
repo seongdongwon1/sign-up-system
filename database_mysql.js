@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var mysql = require('mysql');
+var bcrypt = require('bcrypt-nodejs');
 
 var conn = mysql.createConnection({
         host    :       'localhost',
@@ -29,16 +30,24 @@ app.post('/receive', function(req, res){
                 var NAME = req.body.user_name;
                 var EMAIL = req.body.user_email;
                 var EMAIL2 = req.body.user_email2;
-                var sql = 'INSERT INTO topic(ID, NICK, PW1, PW2, NAME, EMAIL, EMAIL2) VALUES(?, ?, ?, ?, ?, ?, ?)';
-                var params = [ID, NICK, PW1, PW2, NAME, EMAIL, EMAIL2];
-                conn.query(sql, params, function(err, rows){
-                        if(err){
-                                console.log(err);
-                                res.status(500).send("ERROR");
-                        }
-                        console.log('The file has been saved!');//데이터가 db에 잘 저장 되었다면, 콘솔에 성공이라 찍는다.
-                        res.redirect('/'+rows.insertId);
-                });
+
+                if(PW1 === PW2){
+                        bcrypt.hash(PW1, null, null, function(err, hash){
+                                var sql = 'INSERT INTO topic(ID, NICK, PW1, NAME, EMAIL, EMAIL2) VALUES(?, ?, ?, ?, ?, ?)';
+                                var params = [ID, NICK, hash, NAME, EMAIL, EMAIL2];
+                                conn.query(sql, params, function(err, rows){
+                                        if(err){
+                                                console.log(err);
+                                                res.status(500).send("ERROR");
+                                        }
+                                        console.log('success sign-up!');
+                                        console.log('hash');
+                                        res.redirect('/'+rows.insertId);
+                                });
+                        })
+                }
+                
+                
 });
 
 app.listen(3000, function(){
