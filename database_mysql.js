@@ -59,36 +59,56 @@ app.get('/login', function(req, res){
         res.render('login');
 });
 
+//로그인 구현 해결x
 app.post('/login_user', function(req, res){
-        var ID = req.body.login_id;
-        var PW = req.body.login_pw;
-        var sql = 'SELECT * FROM topic WHERE ID = "?"';
+ var loginID = req.body.login_id;
+ var loginPW = req.body.login_pw;
+ var loginsql = 'SELECT * FROM topic WHERE ID = "?"';
       
-                conn.query(sql, ID, function (err, result) {
-                  if (err) {
-                    console.log('err :' + err);
-                    
-                  } else {
-                    if (result.length === 0) {
-                        console.log(result);
-                        console.log('해당 유저가 없습니다');
+ conn.query(loginsql, loginID, function (err, rows, fields) {
+ if (err) {
+  console.log('err :' + err);
+  } else {
+  if (rows[0]!=undefined) {
+        console.log(rows);
+        console.log('해당 유저가 없습니다');
                       
-                    } else {
-                      if (!bcrypt.compareSync(PW, result[0].PW1)) {
+  } else {
+  if (!bcrypt.compareSync(loginPW, rows[0].PW1)) {
+        console.log('패스워드가 일치하지 않습니다');
+                        
+  } else {
+        console.log('로그인 성공');
+        res.redirect('/login__user');
+        };
+    }
+   }
+  }
+ )
+});
+        /*app.post('/login_user', function (req, res, next) {
+                var userId = req.body['login_id'];
+                var userPw = req.body['login_pw'];
+                conn.query('select * from topic where ID="?"' , userId, function (err, rows, fields) {
+                    if (!err) {
+                        if (rows[0]!=undefined) {
+                            res.send('ID : ' + rows[0]['ID']);
+                            console.log('1');
+                        } else {
+                            
+                                
+                      if (!bcrypt.compareSync(userPw, rows[0].PW1)) {
                         console.log('패스워드가 일치하지 않습니다');
                         
                       } else {
                         console.log('로그인 성공');
-                        return(null, {
-                          ID: result[0].ID,
-                          PW: result[0].PW1
-                        });
-                      }
+                        res.redirect('/login__user');
+                        };
                     }
-                  }
-                })
+                }
+                });
         
-        });
+            });*/
                 
                           
 app.listen(3000, function(){
