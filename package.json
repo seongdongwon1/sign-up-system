@@ -1,11 +1,7 @@
 {
   "name": "public",
   "version": "1.0.0",
-<<<<<<< HEAD
-  "description": "",
-=======
   "description": "<https://blog.naver.com/ehddnjs403><br> 공부기록 네이버 블로그",
->>>>>>> 4d3df26604616b3d361be0d02f553f969b6363c1
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,12 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
-    "body-parser": "^1.19.0",
-    "ejs": "^2.6.1",
-    "express": "^4.17.1"
-  }
-=======
     "bcrypt": "^3.0.6",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
@@ -35,5 +25,4 @@
     "url": "https://github.com/seongdongwon1/sign-up-system/issues"
   },
   "homepage": "https://github.com/seongdongwon1/sign-up-system#readme"
->>>>>>> 4d3df26604616b3d361be0d02f553f969b6363c1
 }
