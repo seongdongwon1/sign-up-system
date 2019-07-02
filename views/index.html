@@ -7,11 +7,7 @@
   </head>
 
   <body>
-<<<<<<< HEAD
-    <form action="/receive" method="post">
-=======
     <form action="/" method="post">
->>>>>>> 4d3df26604616b3d361be0d02f553f969b6363c1
     <div class="frame">
      <div class="header">
        <h1> 회원가입 시스템 </h1>
@@ -216,40 +212,21 @@
           let message_email = document.getElementById("emailErrorMessage");
           
           let email_regex = () => {
-<<<<<<< HEAD
-=======
             message_email.innerHTML = " ";
             
->>>>>>> 4d3df26604616b3d361be0d02f553f969b6363c1
             if (user_email.value !="" && user_email2.value !="") {
               
               const emailadd = user_email.value +"@"+ user_email2.value;
               console.log(emailadd);
               
-<<<<<<< HEAD
-              var myRe = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-=======
               var myRe = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
->>>>>>> 4d3df26604616b3d361be0d02f553f969b6363c1
               var myArray = myRe.exec(emailadd);
               if (myArray == null) {
                 message_email.innerHTML = "이메일 형식이 올바르지 않습니다.";
                 return false;
-<<<<<<< HEAD
-              } else {
-                message_email.innerHTML = "이메일 형식이 맞음.";
-              }
-              return true;
-            }
-            else {
-              message_email.innerHTML = "이메일 주소가 입력되어야 합니다.";
-              return false;
-            }
-=======
               } 
               return true;
             }
->>>>>>> 4d3df26604616b3d361be0d02f553f969b6363c1
           }
 
           let emailchange = () => {
@@ -264,8 +241,6 @@
             }
           }
 
-<<<<<<< HEAD
-=======
           document.querySelector('.ub').addEventListener('click', function(){      
           var inputdata = document.forms[0].elements[0].value;   
           sendAjax('http://127.0.0.1:3000/receive', inputdata)
@@ -289,7 +264,6 @@
          });
         }
 
->>>>>>> 4d3df26604616b3d361be0d02f553f969b6363c1
     </script>
   </body>
 
