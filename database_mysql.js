@@ -7,7 +7,7 @@ var bcrypt = require('bcrypt-nodejs');
 var conn = mysql.createConnection({
         host    :       'localhost',
         user    :       'root',
-        password:       '649800',
+        password:       'feel',
         database:       'sdtv'
 });
 
@@ -59,32 +59,34 @@ app.get('/login', function(req, res){
         res.render('login');
 });
 
+app.get('/login__user', function(req, res){
+        res.render('login__user');
+});
+
 //로그인 구현 해결x
 app.post('/login_user', function(req, res){
  var loginID = req.body.login_id;
  var loginPW = req.body.login_pw;
- var loginsql = 'SELECT * FROM topic WHERE ID = "?"';
+ var loginsql = 'SELECT * FROM topic WHERE ID = ';
       
  conn.query(loginsql, loginID, function (err, rows, fields) {
- if (err) {
-  console.log('err :' + err);
-  } else {
-  if (rows[0]!=undefined) {
-        console.log(rows);
-        console.log('해당 유저가 없습니다');
-                      
-  } else {
-  if (!bcrypt.compareSync(loginPW, rows[0].PW1)) {
-        console.log('패스워드가 일치하지 않습니다');
-                        
-  } else {
-        console.log('로그인 성공');
-        res.redirect('/login__user');
-        };
-    }
-   }
-  }
- )
+        if (err) {
+                 console.log('err :' + err);
+        } else {
+                console.log(rows);
+                if (rows[0]!=undefined) {
+                        if (!bcrypt.compareSync(loginPW, rows[0].PW1)) {
+                                console.log('패스워드가 일치하지 않습니다');
+                        } else {
+                                console.log('로그인 성공');
+                                res.redirect('/login__user');
+                        }
+                } else {
+                        console.log(rows[0]);
+                        console.log('해당 유저가 없습니다');
+                }
+        }
+        })
 });
         /*app.post('/login_user', function (req, res, next) {
                 var userId = req.body['login_id'];
