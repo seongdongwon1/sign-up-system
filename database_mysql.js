@@ -31,6 +31,7 @@ app.post('/', function(req, res){
                 var NAME = req.body.user_name;
                 var EMAIL = req.body.user_email;
                 var EMAIL2 = req.body.user_email2;
+                console.log(EMAIL2)
 
                 if(PW1 === PW2){
                         bcrypt.hash(PW1, null, null, function(err, hash){
