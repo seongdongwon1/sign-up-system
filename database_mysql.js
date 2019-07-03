@@ -7,7 +7,7 @@ var bcrypt = require('bcrypt-nodejs');
 var conn = mysql.createConnection({
         host    :       'localhost',
         user    :       'root',
-        password:       'feel',
+        password:       '649800',
         database:       'sdtv'
 });
 
@@ -34,7 +34,7 @@ app.post('/', function(req, res){
 
                 if(PW1 === PW2){
                         bcrypt.hash(PW1, null, null, function(err, hash){
-                                var sql = 'INSERT INTO topic(ID, NICK, PW1, NAME, EMAIL, EMAIL2) VALUES(?, ?, ?, ?, ?, ?)';
+                                var sql = 'INSERT INTO topic(ID, NICK, PW, NAME, EMAIL, EMAIL2) VALUES(?, ?, ?, ?, ?, ?)';
                                 var params = [ID, NICK, hash, NAME, EMAIL, EMAIL2];
                                 conn.query(sql, params, function(err, rows){
                                         if(err){
@@ -63,11 +63,11 @@ app.get('/login__user', function(req, res){
         res.render('login__user');
 });
 
-//로그인 구현 해결x
+
 app.post('/login_user', function(req, res){
  var loginID = req.body.login_id;
  var loginPW = req.body.login_pw;
- var loginsql = 'SELECT * FROM topic WHERE ID = ';
+ var loginsql = 'SELECT * FROM topic WHERE ID = ?';
       
  conn.query(loginsql, loginID, function (err, rows, fields) {
         if (err) {
@@ -75,7 +75,7 @@ app.post('/login_user', function(req, res){
         } else {
                 console.log(rows);
                 if (rows[0]!=undefined) {
-                        if (!bcrypt.compareSync(loginPW, rows[0].PW1)) {
+                        if (!bcrypt.compareSync(loginPW, rows[0].PW)) {
                                 console.log('패스워드가 일치하지 않습니다');
                         } else {
                                 console.log('로그인 성공');
@@ -88,30 +88,6 @@ app.post('/login_user', function(req, res){
         }
         })
 });
-        /*app.post('/login_user', function (req, res, next) {
-                var userId = req.body['login_id'];
-                var userPw = req.body['login_pw'];
-                conn.query('select * from topic where ID="?"' , userId, function (err, rows, fields) {
-                    if (!err) {
-                        if (rows[0]!=undefined) {
-                            res.send('ID : ' + rows[0]['ID']);
-                            console.log('1');
-                        } else {
-                            
-                                
-                      if (!bcrypt.compareSync(userPw, rows[0].PW1)) {
-                        console.log('패스워드가 일치하지 않습니다');
-                        
-                      } else {
-                        console.log('로그인 성공');
-                        res.redirect('/login__user');
-                        };
-                    }
-                }
-                });
-        
-            });*/
-                
                           
 app.listen(3000, function(){
         console.log('connected 3000 port!');
