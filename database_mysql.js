@@ -32,7 +32,7 @@ app.post('/', function(req, res){
                 var EMAIL = req.body.user_email;
                 var EMAIL2 = req.body.user_email2;
                 
-
+                
                 if(PW1 === PW2){
                         bcrypt.hash(PW1, null, null, function(err, hash){
                                 var sql = 'INSERT INTO topic(ID, NICK, PW, NAME, EMAIL, EMAIL2) VALUES(?, ?, ?, ?, ?, ?)';
